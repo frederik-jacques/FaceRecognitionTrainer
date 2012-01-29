@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  SecondViewController.h
 //  FaceRecognitionTrainer
 //
 //  Created by Frederik Jacques on 29/01/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface TrainingViewController : UIViewController
 
 @end

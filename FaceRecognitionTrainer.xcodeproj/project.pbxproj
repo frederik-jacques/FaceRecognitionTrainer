@@ -13,14 +13,20 @@
 		867161B214D55DF400055856 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 867161B014D55DF400055856 /* InfoPlist.strings */; };
 		867161B414D55DF400055856 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161B314D55DF400055856 /* main.m */; };
 		867161B814D55DF400055856 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161B714D55DF400055856 /* AppDelegate.m */; };
-		867161BB14D55DF400055856 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161BA14D55DF400055856 /* FirstViewController.m */; };
+		867161BB14D55DF400055856 /* DetectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161BA14D55DF400055856 /* DetectViewController.m */; };
 		867161BD14D55DF400055856 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161BC14D55DF400055856 /* first.png */; };
 		867161BF14D55DF400055856 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161BE14D55DF400055856 /* first@2x.png */; };
-		867161C214D55DF400055856 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161C114D55DF400055856 /* SecondViewController.m */; };
+		867161C214D55DF400055856 /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161C114D55DF400055856 /* TrainingViewController.m */; };
 		867161C414D55DF400055856 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161C314D55DF400055856 /* second.png */; };
 		867161C614D55DF400055856 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161C514D55DF400055856 /* second@2x.png */; };
-		867161C914D55DF400055856 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161C714D55DF400055856 /* FirstViewController.xib */; };
-		867161CC14D55DF400055856 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161CA14D55DF400055856 /* SecondViewController.xib */; };
+		867161C914D55DF400055856 /* DetectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161C714D55DF400055856 /* DetectViewController.xib */; };
+		867161CC14D55DF400055856 /* TrainingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161CA14D55DF400055856 /* TrainingViewController.xib */; };
+		867161D814D564FE00055856 /* RecognizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161D614D564FE00055856 /* RecognizeViewController.m */; };
+		867161D914D564FE00055856 /* RecognizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161D714D564FE00055856 /* RecognizeViewController.xib */; };
+		867161DD14D5664E00055856 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161DC14D5664E00055856 /* Camera.m */; };
+		867161DF14D567D200055856 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867161DE14D567D200055856 /* AVFoundation.framework */; };
+		86F590A914D5E507006FEF96 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590A814D5E507006FEF96 /* CoreMedia.framework */; };
+		86F590AC14D5E50E006FEF96 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590AB14D5E50E006FEF96 /* CoreVideo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,22 +34,30 @@
 		867161A714D55DF400055856 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		867161A914D55DF400055856 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		867161AB14D55DF400055856 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		867161AF14D55DF400055856 /* FaceRecognitionTrainer-Info.plist */ = {isa = PBXFileReference; path = "FaceRecognitionTrainer-Info.plist"; sourceTree = "<group>"; };
+		867161AF14D55DF400055856 /* FaceRecognitionTrainer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FaceRecognitionTrainer-Info.plist"; sourceTree = "<group>"; };
 		867161B114D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		867161B314D55DF400055856 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		867161B514D55DF400055856 /* FaceRecognitionTrainer-Prefix.pch */ = {isa = PBXFileReference; path = "FaceRecognitionTrainer-Prefix.pch"; sourceTree = "<group>"; };
-		867161B614D55DF400055856 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		867161B514D55DF400055856 /* FaceRecognitionTrainer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FaceRecognitionTrainer-Prefix.pch"; sourceTree = "<group>"; };
+		867161B614D55DF400055856 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		867161B714D55DF400055856 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		867161B914D55DF400055856 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
-		867161BA14D55DF400055856 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		867161B914D55DF400055856 /* DetectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetectViewController.h; sourceTree = "<group>"; };
+		867161BA14D55DF400055856 /* DetectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetectViewController.m; sourceTree = "<group>"; };
 		867161BC14D55DF400055856 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		867161BE14D55DF400055856 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		867161C014D55DF400055856 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
-		867161C114D55DF400055856 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		867161C014D55DF400055856 /* TrainingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
+		867161C114D55DF400055856 /* TrainingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
 		867161C314D55DF400055856 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		867161C514D55DF400055856 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		867161C814D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
-		867161CB14D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
+		867161C814D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetectViewController.xib; sourceTree = "<group>"; };
+		867161CB14D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainingViewController.xib; sourceTree = "<group>"; };
+		867161D514D564FE00055856 /* RecognizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeViewController.h; sourceTree = "<group>"; };
+		867161D614D564FE00055856 /* RecognizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizeViewController.m; sourceTree = "<group>"; };
+		867161D714D564FE00055856 /* RecognizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecognizeViewController.xib; sourceTree = "<group>"; };
+		867161DB14D5664E00055856 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		867161DC14D5664E00055856 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
+		867161DE14D567D200055856 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		86F590A814D5E507006FEF96 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		86F590AB14D5E50E006FEF96 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +65,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86F590AC14D5E50E006FEF96 /* CoreVideo.framework in Frameworks */,
+				86F590A914D5E507006FEF96 /* CoreMedia.framework in Frameworks */,
+				867161DF14D567D200055856 /* AVFoundation.framework in Frameworks */,
 				867161A814D55DF400055856 /* UIKit.framework in Frameworks */,
 				867161AA14D55DF400055856 /* Foundation.framework in Frameworks */,
 				867161AC14D55DF400055856 /* CoreGraphics.framework in Frameworks */,
@@ -80,6 +97,9 @@
 		867161A614D55DF400055856 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86F590AB14D5E50E006FEF96 /* CoreVideo.framework */,
+				86F590A814D5E507006FEF96 /* CoreMedia.framework */,
+				867161DE14D567D200055856 /* AVFoundation.framework */,
 				867161A714D55DF400055856 /* UIKit.framework */,
 				867161A914D55DF400055856 /* Foundation.framework */,
 				867161AB14D55DF400055856 /* CoreGraphics.framework */,
@@ -92,16 +112,9 @@
 			children = (
 				867161B614D55DF400055856 /* AppDelegate.h */,
 				867161B714D55DF400055856 /* AppDelegate.m */,
-				867161B914D55DF400055856 /* FirstViewController.h */,
-				867161BA14D55DF400055856 /* FirstViewController.m */,
-				867161BC14D55DF400055856 /* first.png */,
-				867161BE14D55DF400055856 /* first@2x.png */,
-				867161C014D55DF400055856 /* SecondViewController.h */,
-				867161C114D55DF400055856 /* SecondViewController.m */,
-				867161C314D55DF400055856 /* second.png */,
-				867161C514D55DF400055856 /* second@2x.png */,
-				867161C714D55DF400055856 /* FirstViewController.xib */,
-				867161CA14D55DF400055856 /* SecondViewController.xib */,
+				867161D214D5601200055856 /* DetectAndSave */,
+				867161D314D5601F00055856 /* Train */,
+				867161D414D564BF00055856 /* Recognize */,
 				867161AE14D55DF400055856 /* Supporting Files */,
 			);
 			path = FaceRecognitionTrainer;
@@ -116,6 +129,50 @@
 				867161B514D55DF400055856 /* FaceRecognitionTrainer-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		867161D214D5601200055856 /* DetectAndSave */ = {
+			isa = PBXGroup;
+			children = (
+				867161DA14D5662A00055856 /* Camera */,
+				867161BC14D55DF400055856 /* first.png */,
+				867161BE14D55DF400055856 /* first@2x.png */,
+				867161B914D55DF400055856 /* DetectViewController.h */,
+				867161BA14D55DF400055856 /* DetectViewController.m */,
+				867161C714D55DF400055856 /* DetectViewController.xib */,
+			);
+			name = DetectAndSave;
+			sourceTree = "<group>";
+		};
+		867161D314D5601F00055856 /* Train */ = {
+			isa = PBXGroup;
+			children = (
+				867161C314D55DF400055856 /* second.png */,
+				867161C514D55DF400055856 /* second@2x.png */,
+				867161C014D55DF400055856 /* TrainingViewController.h */,
+				867161C114D55DF400055856 /* TrainingViewController.m */,
+				867161CA14D55DF400055856 /* TrainingViewController.xib */,
+			);
+			name = Train;
+			sourceTree = "<group>";
+		};
+		867161D414D564BF00055856 /* Recognize */ = {
+			isa = PBXGroup;
+			children = (
+				867161D514D564FE00055856 /* RecognizeViewController.h */,
+				867161D614D564FE00055856 /* RecognizeViewController.m */,
+				867161D714D564FE00055856 /* RecognizeViewController.xib */,
+			);
+			name = Recognize;
+			sourceTree = "<group>";
+		};
+		867161DA14D5662A00055856 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				867161DB14D5664E00055856 /* Camera.h */,
+				867161DC14D5664E00055856 /* Camera.m */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +231,9 @@
 				867161BF14D55DF400055856 /* first@2x.png in Resources */,
 				867161C414D55DF400055856 /* second.png in Resources */,
 				867161C614D55DF400055856 /* second@2x.png in Resources */,
-				867161C914D55DF400055856 /* FirstViewController.xib in Resources */,
-				867161CC14D55DF400055856 /* SecondViewController.xib in Resources */,
+				867161C914D55DF400055856 /* DetectViewController.xib in Resources */,
+				867161CC14D55DF400055856 /* TrainingViewController.xib in Resources */,
+				867161D914D564FE00055856 /* RecognizeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,8 +246,10 @@
 			files = (
 				867161B414D55DF400055856 /* main.m in Sources */,
 				867161B814D55DF400055856 /* AppDelegate.m in Sources */,
-				867161BB14D55DF400055856 /* FirstViewController.m in Sources */,
-				867161C214D55DF400055856 /* SecondViewController.m in Sources */,
+				867161BB14D55DF400055856 /* DetectViewController.m in Sources */,
+				867161C214D55DF400055856 /* TrainingViewController.m in Sources */,
+				867161D814D564FE00055856 /* RecognizeViewController.m in Sources */,
+				867161DD14D5664E00055856 /* Camera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,20 +264,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		867161C714D55DF400055856 /* FirstViewController.xib */ = {
+		867161C714D55DF400055856 /* DetectViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				867161C814D55DF400055856 /* en */,
 			);
-			name = FirstViewController.xib;
+			name = DetectViewController.xib;
 			sourceTree = "<group>";
 		};
-		867161CA14D55DF400055856 /* SecondViewController.xib */ = {
+		867161CA14D55DF400055856 /* TrainingViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				867161CB14D55DF400055856 /* en */,
 			);
-			name = SecondViewController.xib;
+			name = TrainingViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -307,6 +367,7 @@
 				867161D114D55DF400055856 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
