@@ -19,7 +19,7 @@
     AVCaptureConnection *captureConnection;
     AVCaptureStillImageOutput *stillImageOutput;
     
-    NSMutableArray *images;
+    NSData *image;
 }
 
 @property (nonatomic, retain) AVCaptureSession *captureSession;
@@ -30,6 +30,6 @@
 @property (nonatomic, retain) AVCaptureConnection *captureConnection;
 @property (nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
 
-@property (nonatomic, retain) NSMutableArray *images;
+@property (nonatomic, retain) NSData *image;
 
 @end

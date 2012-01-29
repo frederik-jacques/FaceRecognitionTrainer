@@ -27,6 +27,9 @@
 		867161DF14D567D200055856 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867161DE14D567D200055856 /* AVFoundation.framework */; };
 		86F590A914D5E507006FEF96 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590A814D5E507006FEF96 /* CoreMedia.framework */; };
 		86F590AC14D5E50E006FEF96 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590AB14D5E50E006FEF96 /* CoreVideo.framework */; };
+		86F590B014D5F3E6006FEF96 /* PostCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F590AF14D5F3E6006FEF96 /* PostCall.m */; };
+		86F590B314D5F5B2006FEF96 /* DetectCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F590B214D5F5B2006FEF96 /* DetectCall.m */; };
+		86F590B714D5F691006FEF96 /* FaceConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F590B614D5F691006FEF96 /* FaceConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,12 @@
 		867161DE14D567D200055856 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		86F590A814D5E507006FEF96 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		86F590AB14D5E50E006FEF96 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		86F590AE14D5F3E6006FEF96 /* PostCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCall.h; sourceTree = "<group>"; };
+		86F590AF14D5F3E6006FEF96 /* PostCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCall.m; sourceTree = "<group>"; };
+		86F590B114D5F5B2006FEF96 /* DetectCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectCall.h; sourceTree = "<group>"; };
+		86F590B214D5F5B2006FEF96 /* DetectCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectCall.m; sourceTree = "<group>"; };
+		86F590B514D5F691006FEF96 /* FaceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceConstants.h; sourceTree = "<group>"; };
+		86F590B614D5F691006FEF96 /* FaceConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +119,7 @@
 		867161AD14D55DF400055856 /* FaceRecognitionTrainer */ = {
 			isa = PBXGroup;
 			children = (
+				86F590B414D5F681006FEF96 /* Constants */,
 				867161B614D55DF400055856 /* AppDelegate.h */,
 				867161B714D55DF400055856 /* AppDelegate.m */,
 				867161D214D5601200055856 /* DetectAndSave */,
@@ -134,6 +144,7 @@
 		867161D214D5601200055856 /* DetectAndSave */ = {
 			isa = PBXGroup;
 			children = (
+				86F590AD14D5F3D1006FEF96 /* Calls */,
 				867161DA14D5662A00055856 /* Camera */,
 				867161BC14D55DF400055856 /* first.png */,
 				867161BE14D55DF400055856 /* first@2x.png */,
@@ -173,6 +184,26 @@
 				867161DC14D5664E00055856 /* Camera.m */,
 			);
 			name = Camera;
+			sourceTree = "<group>";
+		};
+		86F590AD14D5F3D1006FEF96 /* Calls */ = {
+			isa = PBXGroup;
+			children = (
+				86F590AE14D5F3E6006FEF96 /* PostCall.h */,
+				86F590AF14D5F3E6006FEF96 /* PostCall.m */,
+				86F590B114D5F5B2006FEF96 /* DetectCall.h */,
+				86F590B214D5F5B2006FEF96 /* DetectCall.m */,
+			);
+			name = Calls;
+			sourceTree = "<group>";
+		};
+		86F590B414D5F681006FEF96 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				86F590B514D5F691006FEF96 /* FaceConstants.h */,
+				86F590B614D5F691006FEF96 /* FaceConstants.m */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +281,9 @@
 				867161C214D55DF400055856 /* TrainingViewController.m in Sources */,
 				867161D814D564FE00055856 /* RecognizeViewController.m in Sources */,
 				867161DD14D5664E00055856 /* Camera.m in Sources */,
+				86F590B014D5F3E6006FEF96 /* PostCall.m in Sources */,
+				86F590B314D5F5B2006FEF96 /* DetectCall.m in Sources */,
+				86F590B714D5F691006FEF96 /* FaceConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

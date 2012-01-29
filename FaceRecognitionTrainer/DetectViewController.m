@@ -7,6 +7,7 @@
 //
 
 #import "DetectViewController.h"
+#import "DetectCall.h"
 
 @implementation DetectViewController
 
@@ -19,12 +20,18 @@
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         
         camera = [[Camera alloc] initWithFrame:self.view.frame];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadPhotos:) name:@"UPLOAD_PHOTOS" object:camera];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadPhotos:) name:@"UPLOAD_PHOTO" object:camera];
         [self.view addSubview:camera];
     }
     return self;
 }
-							
+
+- (void)uploadPhotos:(id)sender {
+    NSLog(@"[DetectViewContainer] Upload photo");
+    DetectCall *call = [[DetectCall alloc] initWithImageData:self.camera.image];
+    [call execute];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
@@ -41,11 +48,12 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.camera = nil;
 }
 
 - (void)dealloc {
     NSLog(@"[DetectVC] Dealloc");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UPLOAD_PHOTOS" object:camera];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UPLOAD_PHOTO" object:camera];
     
     [camera release];
     camera = nil;

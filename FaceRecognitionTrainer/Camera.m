@@ -14,7 +14,7 @@
 
 @implementation Camera
 
-@synthesize images;
+@synthesize image;
 @synthesize captureSession;
 @synthesize device;
 @synthesize deviceInput;
@@ -25,9 +25,7 @@
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self) {
-        self.images = [[[NSMutableArray alloc] init] autorelease];
-        
+    if (self) {        
         self.captureSession = [[[AVCaptureSession alloc] init] autorelease];
         self.captureSession.sessionPreset = AVCaptureSessionPresetMedium;
 
@@ -94,43 +92,22 @@
         // Add gestures to camera
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takeAPicture:)];
         tapGesture.numberOfTapsRequired = 1;
-        
-        UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showActionsPanel:)];
-        doubleTapGesture.numberOfTapsRequired = 2;
-        
-        [tapGesture requireGestureRecognizerToFail:doubleTapGesture];
         [self addGestureRecognizer:tapGesture];
-        [self addGestureRecognizer:doubleTapGesture];
         
         [tapGesture release];
         tapGesture = nil;
-        
-        [doubleTapGesture release];
-        doubleTapGesture = nil;
+    
     }
     return self;
 }
 
 - (void)showActionSheet {
-    if( [self.images count] > 0 ){
-        NSString *titleForRemovePhotos = nil;
-        if( [self.images count] == 1 ){
-            titleForRemovePhotos = @"Remove 1 picture";
-        }else{
-            titleForRemovePhotos = [NSString stringWithFormat:@"Remove %i pictures", [self.images count]];
-        }
+
+    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:@"And now ..." delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Remove picture" otherButtonTitles:@"Upload for recognition", nil];
         
-        
-        UIActionSheet *actionsheet = nil;
-        if( [self.images count] < 3 ){
-            actionsheet = [[UIActionSheet alloc] initWithTitle:@"And now ..." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:titleForRemovePhotos otherButtonTitles:@"Upload for recognition", nil];
-        }else{
-            actionsheet = [[UIActionSheet alloc] initWithTitle:@"And now ..." delegate:self cancelButtonTitle:nil destructiveButtonTitle:titleForRemovePhotos otherButtonTitles:@"Upload for recognition", nil];
-        }
-        [actionsheet showInView:self];
-        [actionsheet release];
-        actionsheet = nil;
-    }
+    [actionsheet showInView:self];
+    [actionsheet release];
+    actionsheet = nil;
 }
 
 #pragma mark - Gesture methods
@@ -139,20 +116,12 @@
     // Grab an image from the videostream
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:self.captureConnection completionHandler:
      ^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
-         // Got the image, add it to an array
-         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-         [self.images addObject:imageData];
          
-         if( [self.images count] == 3 ){
-             [self showActionSheet];
-         }
+         // Got the image, show actionsheet
+         self.image = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
+         [self showActionSheet];
+         
      }];
-}
-
-- (void)showActionsPanel:(UITapGestureRecognizer *)sender {
-    NSLog(@"[Camera] Double tap");
-    // Show an actionsheet with some options when there are images in the array
-    [self showActionSheet];
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -161,12 +130,12 @@
     
     switch (buttonIndex) {
         case 0: // Remove photos
-            [self.images removeAllObjects];
+            self.image = nil;
             break;
             
         case 1:
             // Upload
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UPLOAD_PHOTOS" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UPLOAD_PHOTO" object:self];
             break;
     }
     
@@ -175,8 +144,8 @@
 #pragma mark - Dealloc
 - (void)dealloc {
     NSLog(@"[Camera] Dealloc");
-    [images release];
-    images = nil;
+    [image release];
+    image = nil;
     
     [captureSession release];
     captureSession = nil;
