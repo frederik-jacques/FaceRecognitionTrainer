@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FaceConstants.h"
 
 @interface PostCall : NSMutableURLRequest{
     NSString *boundary;

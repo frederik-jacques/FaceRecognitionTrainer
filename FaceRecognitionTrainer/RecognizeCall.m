@@ -1,24 +1,28 @@
 //
-//  DetectCall.m
+//  RecognizeCall.m
 //  FaceRecognitionTrainer
 //
-//  Created by Frederik Jacques on 29/01/12.
+//  Created by Frederik Jacques on 30/01/12.
 //  Copyright (c) 2012 dev-dev. All rights reserved.
 //
 
-#import "DetectCall.h"
+#import "RecognizeCall.h"
 
-@implementation DetectCall
+@implementation RecognizeCall
 
+@synthesize UIDs;
 @synthesize imageData;
-@synthesize faceDetectVO;
+@synthesize tags;
+@synthesize highestConfidence;
 
-- (id)initWithImageData:(NSData *)theImageData {
-    self = [super initWithTheUrl:[NSURL URLWithString:FACE_DETECT_URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeOut:180.0];
+- (id)initWithUIDs:(NSString *)theUIDs andImageData:(NSData *)theImageData {
+    self = [super initWithTheUrl:[NSURL URLWithString:FACE_RECOGNIZE_URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeOut:10.0];
     
     if( self != nil ){
-        NSLog(@"[DetectCall] Init");
+        NSLog(@"[RecognizeCall] Init");
+        self.UIDs = theUIDs;
         self.imageData = theImageData;
+        
         [self setHTTPBody:[self createHTTPBody]];
     }
     
@@ -26,7 +30,7 @@
 }
 
 - (NSData *)createHTTPBody {
-    NSLog(@"[DetectCall] Create HTTPBody");
+    NSLog(@"[TrainingCall] Create HTTPBody");
     NSMutableData *theData = [NSMutableData data];
     NSString *beginLine = [NSString stringWithFormat:@"--%@\r\n", self.boundary];
     NSString *endLine = [NSString stringWithFormat:@"\r\n--%@\r\n", self.boundary];
@@ -43,8 +47,8 @@
     [self utfAppendBody:theData data:endLine];
     
     [self utfAppendBody:theData
-                   data:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"urls\"\r\n\r\n"]];
-    [self utfAppendBody:theData data:@""];
+                   data:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uids\"\r\n\r\n"]];
+    [self utfAppendBody:theData data:self.UIDs];
     [self utfAppendBody:theData data:endLine];
     
     [self utfAppendBody:theData
@@ -62,49 +66,56 @@
     [self utfAppendBody:theData
                    data:[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"]];
     
-    [theData appendData:UIImageJPEGRepresentation([UIImage imageWithData:imageData], 1.0)];
+    [theData appendData:UIImageJPEGRepresentation([UIImage imageWithData:self.imageData], 1.0)];
     [self utfAppendBody:theData data:endLine];
-        
+    
     return theData;
     
 }
 
 - (void)execute {
-    NSLog(@"[DetectCall] Execute");
+    NSLog(@"[RecognizeCall] Execute");
     
     [NSURLConnection sendAsynchronousRequest:self queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *theResponse, NSData *theData, NSError *theError) {
         
         if( theData != nil ){
-            NSLog(@"[DetectCall] Got JSON data from server");
+            NSLog(@"[RecognizeCall] Got JSON data from server");
             
-            NSLog(@"[DetectCall] Parsing JSON");
+            NSLog(@"[RecognizeCall] Parsing JSON");
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:theData
-                                  options:kNilOptions error:&theError];
+                                                                 options:kNilOptions error:&theError];
             
-            NSLog(@"[DetectCall] %@", json);
+            NSLog(@"[RecognizeCall] %@", json);
             
-            NSArray *photoData = [json objectForKey:@"photos"];
-            NSLog(@"[DetectCall] Converted json to array");
-            NSDictionary *photoDict = [photoData objectAtIndex:0];
-            NSLog(@"[DetectCall] Converted array to dict");
-            self.faceDetectVO = [[[FaceDetectVO alloc] initWithDictionary:photoDict] autorelease];
-            NSLog(@"[DetectCall] Parsed");
+            NSArray *results = [json objectForKey:@"photos"];
+            NSDictionary *photos = [results objectAtIndex:0];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DETECTING_COMPLETE" object:self];
+            NSArray *tagsArray = [photos objectForKey:@"tags"];
+            
+            self.highestConfidence = nil;
+            self.tags = [[[NSMutableArray alloc] init] autorelease];
+            for (NSDictionary *tagDict in tagsArray) {
+                TagVO *tagVO = [[TagVO alloc] initWithDictionary:tagDict];
+                
+                for ( UidVO *vo in tagVO.uids) {
+                    if( vo.confidence > highestConfidence.confidence ){
+                        self.highestConfidence = vo;
+                    }
+                }
+                
+                [self.tags addObject:tagVO];
+                [tagVO info];
+                [tagVO release];
+                tagVO = nil;
+            }
+            
+            NSLog(@"[RecognizeCall] Highest confidence = %@", self.highestConfidence.uid);
+                        
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RECOGNITION_COMPLETE" object:self];
         }
         
     }];
 }
 
-- (void)dealloc {
-    NSLog(@"[DetectCall] Dealloc");
-    [imageData release];
-    imageData = nil;
-    
-    [faceDetectVO release];
-    faceDetectVO = nil;
-    
-    [super dealloc];
-}
 
 @end

@@ -16,15 +16,29 @@
 		867161BB14D55DF400055856 /* DetectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161BA14D55DF400055856 /* DetectViewController.m */; };
 		867161BD14D55DF400055856 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161BC14D55DF400055856 /* first.png */; };
 		867161BF14D55DF400055856 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161BE14D55DF400055856 /* first@2x.png */; };
-		867161C214D55DF400055856 /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161C114D55DF400055856 /* TrainingViewController.m */; };
 		867161C414D55DF400055856 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161C314D55DF400055856 /* second.png */; };
 		867161C614D55DF400055856 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 867161C514D55DF400055856 /* second@2x.png */; };
 		867161C914D55DF400055856 /* DetectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161C714D55DF400055856 /* DetectViewController.xib */; };
-		867161CC14D55DF400055856 /* TrainingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161CA14D55DF400055856 /* TrainingViewController.xib */; };
 		867161D814D564FE00055856 /* RecognizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161D614D564FE00055856 /* RecognizeViewController.m */; };
 		867161D914D564FE00055856 /* RecognizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867161D714D564FE00055856 /* RecognizeViewController.xib */; };
 		867161DD14D5664E00055856 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 867161DC14D5664E00055856 /* Camera.m */; };
 		867161DF14D567D200055856 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867161DE14D567D200055856 /* AVFoundation.framework */; };
+		868018DC14D6899000015536 /* FaceDetectVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 868018DB14D6899000015536 /* FaceDetectVO.m */; };
+		868018E114D68A3B00015536 /* TagVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 868018E014D68A3B00015536 /* TagVO.m */; };
+		868018E414D68BB800015536 /* AttributeVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 868018E314D68BB800015536 /* AttributeVO.m */; };
+		868018E814D6BD0E00015536 /* SaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 868018E614D6BD0E00015536 /* SaveViewController.m */; };
+		868018E914D6BD0E00015536 /* SaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 868018E714D6BD0E00015536 /* SaveViewController.xib */; };
+		868018F014D6CFF300015536 /* SaveCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 868018EF14D6CFF300015536 /* SaveCall.m */; };
+		868018F314D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 868018F114D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodeld */; };
+		868018FB14D7167200015536 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868018FA14D7167200015536 /* CoreData.framework */; };
+		868018FF14D7178700015536 /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 868018FD14D7178700015536 /* TrainingViewController.m */; };
+		8680190014D7178700015536 /* TrainingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 868018FE14D7178700015536 /* TrainingViewController.xib */; };
+		8680190614D7212D00015536 /* TrainingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680190514D7212D00015536 /* TrainingCell.m */; };
+		8680190914D7234700015536 /* TrainingCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680190814D7234600015536 /* TrainingCall.m */; };
+		8680190C14D72D1D00015536 /* RecognizeCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680190B14D72D1D00015536 /* RecognizeCamera.m */; };
+		8680190F14D72F8A00015536 /* RecognizeCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680190E14D72F8A00015536 /* RecognizeCall.m */; };
+		8680191214D735AF00015536 /* UidVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680191114D735AF00015536 /* UidVO.m */; };
+		8680191514D74B9200015536 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680191414D74B9100015536 /* User.m */; };
 		86F590A914D5E507006FEF96 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590A814D5E507006FEF96 /* CoreMedia.framework */; };
 		86F590AC14D5E50E006FEF96 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590AB14D5E50E006FEF96 /* CoreVideo.framework */; };
 		86F590B014D5F3E6006FEF96 /* PostCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F590AF14D5F3E6006FEF96 /* PostCall.m */; };
@@ -47,18 +61,43 @@
 		867161BA14D55DF400055856 /* DetectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetectViewController.m; sourceTree = "<group>"; };
 		867161BC14D55DF400055856 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		867161BE14D55DF400055856 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		867161C014D55DF400055856 /* TrainingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
-		867161C114D55DF400055856 /* TrainingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
 		867161C314D55DF400055856 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		867161C514D55DF400055856 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		867161C814D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetectViewController.xib; sourceTree = "<group>"; };
-		867161CB14D55DF400055856 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainingViewController.xib; sourceTree = "<group>"; };
 		867161D514D564FE00055856 /* RecognizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeViewController.h; sourceTree = "<group>"; };
 		867161D614D564FE00055856 /* RecognizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizeViewController.m; sourceTree = "<group>"; };
 		867161D714D564FE00055856 /* RecognizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecognizeViewController.xib; sourceTree = "<group>"; };
 		867161DB14D5664E00055856 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		867161DC14D5664E00055856 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		867161DE14D567D200055856 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		868018DA14D6899000015536 /* FaceDetectVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceDetectVO.h; sourceTree = "<group>"; };
+		868018DB14D6899000015536 /* FaceDetectVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceDetectVO.m; sourceTree = "<group>"; };
+		868018DF14D68A3B00015536 /* TagVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagVO.h; sourceTree = "<group>"; };
+		868018E014D68A3B00015536 /* TagVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagVO.m; sourceTree = "<group>"; };
+		868018E214D68BB800015536 /* AttributeVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeVO.h; sourceTree = "<group>"; };
+		868018E314D68BB800015536 /* AttributeVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeVO.m; sourceTree = "<group>"; };
+		868018E514D6BD0E00015536 /* SaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveViewController.h; sourceTree = "<group>"; };
+		868018E614D6BD0E00015536 /* SaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveViewController.m; sourceTree = "<group>"; };
+		868018E714D6BD0E00015536 /* SaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveViewController.xib; sourceTree = "<group>"; };
+		868018EE14D6CFF300015536 /* SaveCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveCall.h; sourceTree = "<group>"; };
+		868018EF14D6CFF300015536 /* SaveCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCall.m; sourceTree = "<group>"; };
+		868018F214D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FaceRecognitionTrainer.xcdatamodel; sourceTree = "<group>"; };
+		868018FA14D7167200015536 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		868018FC14D7178700015536 /* TrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
+		868018FD14D7178700015536 /* TrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
+		868018FE14D7178700015536 /* TrainingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingViewController.xib; sourceTree = "<group>"; };
+		8680190414D7212D00015536 /* TrainingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingCell.h; sourceTree = "<group>"; };
+		8680190514D7212D00015536 /* TrainingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingCell.m; sourceTree = "<group>"; };
+		8680190714D7234600015536 /* TrainingCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingCall.h; sourceTree = "<group>"; };
+		8680190814D7234600015536 /* TrainingCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingCall.m; sourceTree = "<group>"; };
+		8680190A14D72D1D00015536 /* RecognizeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeCamera.h; sourceTree = "<group>"; };
+		8680190B14D72D1D00015536 /* RecognizeCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizeCamera.m; sourceTree = "<group>"; };
+		8680190D14D72F8900015536 /* RecognizeCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizeCall.h; sourceTree = "<group>"; };
+		8680190E14D72F8A00015536 /* RecognizeCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizeCall.m; sourceTree = "<group>"; };
+		8680191014D735AF00015536 /* UidVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UidVO.h; sourceTree = "<group>"; };
+		8680191114D735AF00015536 /* UidVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UidVO.m; sourceTree = "<group>"; };
+		8680191314D74B9000015536 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		8680191414D74B9100015536 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		86F590A814D5E507006FEF96 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		86F590AB14D5E50E006FEF96 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		86F590AE14D5F3E6006FEF96 /* PostCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCall.h; sourceTree = "<group>"; };
@@ -74,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				868018FB14D7167200015536 /* CoreData.framework in Frameworks */,
 				86F590AC14D5E50E006FEF96 /* CoreVideo.framework in Frameworks */,
 				86F590A914D5E507006FEF96 /* CoreMedia.framework in Frameworks */,
 				867161DF14D567D200055856 /* AVFoundation.framework in Frameworks */,
@@ -106,6 +146,7 @@
 		867161A614D55DF400055856 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				868018FA14D7167200015536 /* CoreData.framework */,
 				86F590AB14D5E50E006FEF96 /* CoreVideo.framework */,
 				86F590A814D5E507006FEF96 /* CoreMedia.framework */,
 				867161DE14D567D200055856 /* AVFoundation.framework */,
@@ -119,6 +160,9 @@
 		867161AD14D55DF400055856 /* FaceRecognitionTrainer */ = {
 			isa = PBXGroup;
 			children = (
+				8680191314D74B9000015536 /* User.h */,
+				8680191414D74B9100015536 /* User.m */,
+				868018F114D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodeld */,
 				86F590B414D5F681006FEF96 /* Constants */,
 				867161B614D55DF400055856 /* AppDelegate.h */,
 				867161B714D55DF400055856 /* AppDelegate.m */,
@@ -144,8 +188,10 @@
 		867161D214D5601200055856 /* DetectAndSave */ = {
 			isa = PBXGroup;
 			children = (
+				868018DE14D6899700015536 /* VO */,
 				86F590AD14D5F3D1006FEF96 /* Calls */,
 				867161DA14D5662A00055856 /* Camera */,
+				868018EA14D6C22800015536 /* Save */,
 				867161BC14D55DF400055856 /* first.png */,
 				867161BE14D55DF400055856 /* first@2x.png */,
 				867161B914D55DF400055856 /* DetectViewController.h */,
@@ -160,9 +206,11 @@
 			children = (
 				867161C314D55DF400055856 /* second.png */,
 				867161C514D55DF400055856 /* second@2x.png */,
-				867161C014D55DF400055856 /* TrainingViewController.h */,
-				867161C114D55DF400055856 /* TrainingViewController.m */,
-				867161CA14D55DF400055856 /* TrainingViewController.xib */,
+				868018FC14D7178700015536 /* TrainingViewController.h */,
+				868018FD14D7178700015536 /* TrainingViewController.m */,
+				868018FE14D7178700015536 /* TrainingViewController.xib */,
+				8680190414D7212D00015536 /* TrainingCell.h */,
+				8680190514D7212D00015536 /* TrainingCell.m */,
 			);
 			name = Train;
 			sourceTree = "<group>";
@@ -182,8 +230,35 @@
 			children = (
 				867161DB14D5664E00055856 /* Camera.h */,
 				867161DC14D5664E00055856 /* Camera.m */,
+				8680190A14D72D1D00015536 /* RecognizeCamera.h */,
+				8680190B14D72D1D00015536 /* RecognizeCamera.m */,
 			);
 			name = Camera;
+			sourceTree = "<group>";
+		};
+		868018DE14D6899700015536 /* VO */ = {
+			isa = PBXGroup;
+			children = (
+				868018DA14D6899000015536 /* FaceDetectVO.h */,
+				868018DB14D6899000015536 /* FaceDetectVO.m */,
+				868018DF14D68A3B00015536 /* TagVO.h */,
+				868018E014D68A3B00015536 /* TagVO.m */,
+				868018E214D68BB800015536 /* AttributeVO.h */,
+				868018E314D68BB800015536 /* AttributeVO.m */,
+				8680191014D735AF00015536 /* UidVO.h */,
+				8680191114D735AF00015536 /* UidVO.m */,
+			);
+			name = VO;
+			sourceTree = "<group>";
+		};
+		868018EA14D6C22800015536 /* Save */ = {
+			isa = PBXGroup;
+			children = (
+				868018E514D6BD0E00015536 /* SaveViewController.h */,
+				868018E614D6BD0E00015536 /* SaveViewController.m */,
+				868018E714D6BD0E00015536 /* SaveViewController.xib */,
+			);
+			name = Save;
 			sourceTree = "<group>";
 		};
 		86F590AD14D5F3D1006FEF96 /* Calls */ = {
@@ -193,6 +268,12 @@
 				86F590AF14D5F3E6006FEF96 /* PostCall.m */,
 				86F590B114D5F5B2006FEF96 /* DetectCall.h */,
 				86F590B214D5F5B2006FEF96 /* DetectCall.m */,
+				868018EE14D6CFF300015536 /* SaveCall.h */,
+				868018EF14D6CFF300015536 /* SaveCall.m */,
+				8680190714D7234600015536 /* TrainingCall.h */,
+				8680190814D7234600015536 /* TrainingCall.m */,
+				8680190D14D72F8900015536 /* RecognizeCall.h */,
+				8680190E14D72F8A00015536 /* RecognizeCall.m */,
 			);
 			name = Calls;
 			sourceTree = "<group>";
@@ -263,8 +344,9 @@
 				867161C414D55DF400055856 /* second.png in Resources */,
 				867161C614D55DF400055856 /* second@2x.png in Resources */,
 				867161C914D55DF400055856 /* DetectViewController.xib in Resources */,
-				867161CC14D55DF400055856 /* TrainingViewController.xib in Resources */,
 				867161D914D564FE00055856 /* RecognizeViewController.xib in Resources */,
+				868018E914D6BD0E00015536 /* SaveViewController.xib in Resources */,
+				8680190014D7178700015536 /* TrainingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,12 +360,24 @@
 				867161B414D55DF400055856 /* main.m in Sources */,
 				867161B814D55DF400055856 /* AppDelegate.m in Sources */,
 				867161BB14D55DF400055856 /* DetectViewController.m in Sources */,
-				867161C214D55DF400055856 /* TrainingViewController.m in Sources */,
 				867161D814D564FE00055856 /* RecognizeViewController.m in Sources */,
 				867161DD14D5664E00055856 /* Camera.m in Sources */,
 				86F590B014D5F3E6006FEF96 /* PostCall.m in Sources */,
 				86F590B314D5F5B2006FEF96 /* DetectCall.m in Sources */,
 				86F590B714D5F691006FEF96 /* FaceConstants.m in Sources */,
+				868018DC14D6899000015536 /* FaceDetectVO.m in Sources */,
+				868018E114D68A3B00015536 /* TagVO.m in Sources */,
+				868018E414D68BB800015536 /* AttributeVO.m in Sources */,
+				868018E814D6BD0E00015536 /* SaveViewController.m in Sources */,
+				868018F014D6CFF300015536 /* SaveCall.m in Sources */,
+				868018F314D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodeld in Sources */,
+				868018FF14D7178700015536 /* TrainingViewController.m in Sources */,
+				8680190614D7212D00015536 /* TrainingCell.m in Sources */,
+				8680190914D7234700015536 /* TrainingCall.m in Sources */,
+				8680190C14D72D1D00015536 /* RecognizeCamera.m in Sources */,
+				8680190F14D72F8A00015536 /* RecognizeCall.m in Sources */,
+				8680191214D735AF00015536 /* UidVO.m in Sources */,
+				8680191514D74B9200015536 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,14 +398,6 @@
 				867161C814D55DF400055856 /* en */,
 			);
 			name = DetectViewController.xib;
-			sourceTree = "<group>";
-		};
-		867161CA14D55DF400055856 /* TrainingViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				867161CB14D55DF400055856 /* en */,
-			);
-			name = TrainingViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -404,6 +490,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		868018F114D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				868018F214D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodel */,
+			);
+			currentVersion = 868018F214D6DD2100015536 /* FaceRecognitionTrainer.xcdatamodel */;
+			path = FaceRecognitionTrainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8671619A14D55DF400055856 /* Project object */;
 }

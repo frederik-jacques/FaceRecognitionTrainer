@@ -1,26 +1,66 @@
 //
-//  SecondViewController.m
+//  TrainingViewController.m
 //  FaceRecognitionTrainer
 //
-//  Created by Frederik Jacques on 29/01/12.
+//  Created by Frederik Jacques on 30/01/12.
 //  Copyright (c) 2012 dev-dev. All rights reserved.
 //
 
 #import "TrainingViewController.h"
+#import "User.h"
+#import "TrainingCell.h"
 
 @implementation TrainingViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+@synthesize managedObjectContext;
+@synthesize fetchResultController;
+@synthesize trainingCall;
+@synthesize activityIndicator;
+
+- (id)initWithStyle:(UITableViewStyle)style andManagedObjectContext:(NSManagedObjectContext *)context {
+    self = [super initWithStyle:style];
     if (self) {
+        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trainingComplete:) name:@"TRAINING_COMPLETE" object:self.trainingCall];
+        
         self.title = @"Train";
         self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        
+        self.managedObjectContext = context;
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"label" ascending:YES];
+        NSArray *arrSortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        request.sortDescriptors = arrSortDescriptors;
+        [arrSortDescriptors release];
+        arrSortDescriptors = nil;
+        
+        request.predicate = [NSPredicate predicateWithFormat:@"isTrained == NO"];
+        
+        self.fetchResultController = [[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil] autorelease];
+        self.fetchResultController.delegate = self;
+        
+        NSError *error = nil;
+        if( [self.fetchResultController performFetch:&error] ){
+            NSLog(@"[TrainingVC] Fetching users succeeded");
+        }else{
+            NSLog(@"[TrainingVC] Fetching users failed");
+        }
+        
+        self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+        self.activityIndicator.hidesWhenStopped = YES;
+        [self.activityIndicator setHidden:YES];
+        self.activityIndicator.frame = CGRectMake(self.view.center.x, self.view.center.y, self.activityIndicator.frame.size.width, self.activityIndicator.frame.size.height);
+        [self.view addSubview:self.activityIndicator];
+        
     }
     return self;
 }
-							
+
 - (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
+    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -28,18 +68,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"[TrainingVC] View did load");
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    NSLog(@"[TrainingVC] View did unload");
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (void)dealloc {
-    NSLog(@"[TrainingVC] Dealloc");
-    [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,16 +87,98 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return [[self.fetchResultController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchResultController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"UserCell";
+    
+    TrainingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    User *user = [self.fetchResultController objectAtIndexPath:indexPath];
+    
+    if (cell == nil) {
+        cell = [[[TrainingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier andUser:user] autorelease];
+    }
+    
+    // Configure the cell...
+    cell.textLabel.text = user.label;
+    
+    return cell;
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TrainingCell *cell = (TrainingCell *)[tableView cellForRowAtIndexPath:indexPath];
+    User *user = cell.user;
+    
+    [self.activityIndicator setHidden:NO];
+    [self.activityIndicator startAnimating];
+    self.trainingCall = [[[TrainingCall alloc] initWithUser:user] autorelease];
+    [self.trainingCall execute];
+}
+
+- (void)trainingComplete:(id)sender {
+    NSLog(@"[TrainingVC] Training complete");
+    [self.activityIndicator stopAnimating];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"uid MATCHES %@", self.trainingCall.user.uid];
+    
+    NSError *error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if ( results == nil) {
+        NSLog(@"[TrainingVC] Fetch user FAILED");
+    }else if( [results count] == 0 ) {
+        NSLog(@"[TrainingVC] User does not exist!");
+    }else{
+        NSLog(@"[DetectVC] User exist!");
+        User *user = [results lastObject];
+        user.isTrained = [NSNumber numberWithBool:YES];
+    }
+
+    
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate methods
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    NSLog(@"[TrainingVC] Model has been updated!");
+    [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TRAINING_COMPLETE" object:self.trainingCall];
+    
+    [trainingCall release];
+    trainingCall = nil;
+    
+    [fetchResultController release];
+    fetchResultController = nil;
+    
+    [activityIndicator release];
+    activityIndicator = nil;
+    
+    [super dealloc];
 }
 
 @end

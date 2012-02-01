@@ -20,6 +20,8 @@
     AVCaptureStillImageOutput *stillImageOutput;
     
     NSData *image;
+    
+    BOOL isDisabled;
 }
 
 @property (nonatomic, retain) AVCaptureSession *captureSession;
@@ -31,5 +33,7 @@
 @property (nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
 
 @property (nonatomic, retain) NSData *image;
+
+@property (nonatomic, assign) BOOL isDisabled;
 
 @end

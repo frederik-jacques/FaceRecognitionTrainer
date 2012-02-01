@@ -12,10 +12,15 @@
 #import "TrainingViewController.h"
 #import "RecognizeViewController.h"
 
+@interface AppDelegate()
+- (void)useDatabase;
+@end
+
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
+@synthesize userDatabase;
 
 - (void)dealloc {
     [_window release];
@@ -23,27 +28,70 @@
     
     [_tabBarController release];
     _tabBarController = nil;
+    
+    [userDatabase release];
+    userDatabase = nil;
+    
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    if( !self.userDatabase ){
+        NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        url = [url URLByAppendingPathComponent:@"userDB"];
+        
+        self.userDatabase = [[[UIManagedDocument alloc] initWithFileURL:url] autorelease];
+    }
+    
+    return YES;
+}
 
+- (void)startApp {
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    
     // Override point for customization after application launch.
-    UIViewController *detectVC = [[[DetectViewController alloc] initWithNibName:@"DetectViewController" bundle:nil] autorelease];
+    UIViewController *detectVC = [[[DetectViewController alloc] initWithManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
     
-    UIViewController *trainingVC = [[[TrainingViewController alloc] initWithNibName:@"TrainingViewController" bundle:nil] autorelease];
+    UIViewController *trainingVC = [[[TrainingViewController alloc] initWithStyle:UITableViewStylePlain andManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
     
-    UIViewController *recognizeVC = [[[RecognizeViewController alloc] initWithNibName:@"RecognizeViewController" bundle:nil] autorelease];
+    UIViewController *recognizeVC = [[[RecognizeViewController alloc] initWithManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:detectVC, trainingVC, recognizeVC, nil];
     
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
-    return YES;
+}
+
+- (void)useDatabase {
+    NSLog(@"[AppDelegate] Open database");
+    if( ![[NSFileManager defaultManager] fileExistsAtPath:[self.userDatabase.fileURL path]] ){
+        NSLog(@"Create new database");
+        [self.userDatabase saveToURL:self.userDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
+            NSLog(@"Created new database");
+            [self startApp];
+        }];
+    }else if( self.userDatabase.documentState == UIDocumentStateClosed ){
+        NSLog(@"Database closed ... opening");
+        [self.userDatabase openWithCompletionHandler:^(BOOL success){
+            NSLog(@"Database now open");
+            [self startApp];
+        }];
+    }else if( self.userDatabase.documentState == UIDocumentStateNormal ){
+        NSLog(@"Database normal");
+        [self startApp];
+    }
+}
+
+- (void)setUserDatabase:(UIManagedDocument *)theUserDatabase {
+    if( self.userDatabase != theUserDatabase ){
+        [userDatabase release];
+        userDatabase = [theUserDatabase retain];
+        
+        [self useDatabase];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

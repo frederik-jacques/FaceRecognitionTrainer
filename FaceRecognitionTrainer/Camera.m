@@ -22,6 +22,7 @@
 @synthesize previewLayer;
 @synthesize captureConnection;
 @synthesize stillImageOutput;
+@synthesize isDisabled;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -108,6 +109,16 @@
     [actionsheet showInView:self];
     [actionsheet release];
     actionsheet = nil;
+}
+
+- (void)setIsDisabled:(BOOL)value {
+    isDisabled = value;
+    
+    if( isDisabled ){
+        [self setUserInteractionEnabled:NO];
+    }else{
+        [self setUserInteractionEnabled:YES];
+    }
 }
 
 #pragma mark - Gesture methods
