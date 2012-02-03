@@ -82,6 +82,8 @@
     if( [result count] > 0 ){
         User *user = [result lastObject];
         
+        NSLog(@"user %@,%@,%@,%@", user.uid, user.firstname, user.lastname, user.isTrained);
+        
         alert = [[UIAlertView alloc] initWithTitle:@"Ow yeah!" message:[NSString stringWithFormat:@"I'm sure you are %@ %@.", user.firstname, user.lastname] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     }else{
         alert = [[UIAlertView alloc] initWithTitle:@"Oh, pitty" message:[NSString stringWithFormat:@"I couldn't recognize anybody!"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];

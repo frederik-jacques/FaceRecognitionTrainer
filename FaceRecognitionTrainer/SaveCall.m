@@ -12,20 +12,17 @@
 @implementation SaveCall
 
 @synthesize tagVOs;
-@synthesize uid;
-@synthesize label;
+@synthesize user;
 @synthesize confirmed_tid;
-@synthesize firstname, lastname;
 
-- (id)initWithTagVOS:(NSArray *)theTagVOs andUID:(NSString *)theUID andTheLabel:(NSString *)theLabel {
+- (id)initWithTagVOS:(NSArray *)theTagVOs andUser:(User *)theUser {
     self = [super initWithTheUrl:[NSURL URLWithString:FACE_SAVE_URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeOut:10.0];
     
     if( self != nil ){
         NSLog(@"[SaveCall] Init");
         self.tagVOs = theTagVOs;
-        self.uid = theUID;
-        self.label = theLabel;
-
+        self.user = theUser;
+        
         [self setHTTPBody:[self createHTTPBody]];
     }
     
@@ -64,7 +61,7 @@
     
     [self utfAppendBody:theData
                    data:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"uid\"\r\n\r\n"]];
-    [self utfAppendBody:theData data:self.uid];
+    [self utfAppendBody:theData data:self.user.uid];
     [self utfAppendBody:theData data:endLine];
     
     [self utfAppendBody:theData
@@ -74,7 +71,7 @@
     
     [self utfAppendBody:theData
                    data:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"label\"\r\n\r\n"]];
-    [self utfAppendBody:theData data:self.label];
+    [self utfAppendBody:theData data:self.user.label];
     [self utfAppendBody:theData data:endLine];
     
     [self utfAppendBody:theData
@@ -118,17 +115,8 @@
     [tagVOs release];
     tagVOs = nil;
     
-    [uid release];
-    uid = nil;
-    
-    [label release];
-    label = nil;
-    
-    [firstname release];
-    firstname = nil;
-    
-    [lastname release];
-    lastname = nil;
+    [user release];
+    user = nil;
     
     [confirmed_tid release];
     confirmed_tid = nil;

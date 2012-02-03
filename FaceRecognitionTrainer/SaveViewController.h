@@ -7,24 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "User.h"
+#import "AddUserView.h"
 
-@interface SaveViewController : UIViewController {
-    UIToolbar *toolbar;
-    UIBarButtonItem *saveButton;
-    UIBarButtonItem *cancelButton;
-    UITextField *firstNameTextfield;
-    UITextField *lastNameTextfield;
+@interface SaveViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate> {
+    
+    UITableView *tableview;
+    NSManagedObjectContext *managedObjectContext;
+    NSFetchedResultsController *fetchResultController;
+    
+    UINavigationBar *navigationBar;
+ 
+    User *selectedUser;
+    AddUserView *addUserVC;
+    
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *firstNameTextfield;
-@property (nonatomic, retain) IBOutlet UITextField *lastNameTextfield;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, retain) IBOutlet UITableView *tableview;
+@property (nonatomic, assign) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchResultController;
 
-- (IBAction)returnKeyHandler:(id)sender;
-- (IBAction)backgroundTouchedHandler:(id)sender;
-- (IBAction)saveButtonHandler:(id)sender;
-- (IBAction)cancelButtonHandler:(id)sender;
+@property (nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
+
+@property (nonatomic, retain) User *selectedUser;
+@property (nonatomic, retain) AddUserView *addUserVC;
+
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *) context;
+- (IBAction)addButtonClicked:(id)sender;
 
 @end

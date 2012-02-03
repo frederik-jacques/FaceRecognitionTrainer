@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "DetectViewController.h"
-#import "TrainingViewController.h"
+#import "TrainerViewController.h"
 #import "RecognizeViewController.h"
 
 @interface AppDelegate()
@@ -54,7 +54,7 @@
     // Override point for customization after application launch.
     UIViewController *detectVC = [[[DetectViewController alloc] initWithManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
     
-    UIViewController *trainingVC = [[[TrainingViewController alloc] initWithStyle:UITableViewStylePlain andManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
+    UIViewController *trainingVC = [[[TrainerViewController alloc] initWithManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
     
     UIViewController *recognizeVC = [[[RecognizeViewController alloc] initWithManagedObjectContext:self.userDatabase.managedObjectContext] autorelease];
     

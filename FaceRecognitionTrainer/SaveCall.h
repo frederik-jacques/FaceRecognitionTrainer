@@ -7,24 +7,19 @@
 //
 
 #import "PostCall.h"
+#import "User.h"
 
 @interface SaveCall : PostCall {
     NSArray *tagVOs;
-    NSString *uid;
-    NSString *label;
-    NSString *firstname;
-    NSString *lastname;
+    User *user;
     
     NSString *confirmed_tid;
 }
 
 @property (nonatomic, retain) NSArray *tagVOs;
-@property (nonatomic, retain) NSString *uid;
-@property (nonatomic, retain) NSString *label;
+@property (nonatomic, retain) User *user;
 @property (nonatomic, retain) NSString *confirmed_tid;
-@property (nonatomic, retain) NSString *firstname;
-@property (nonatomic, retain) NSString *lastname;
 
-- (id)initWithTagVOS:(NSArray *)theTagVOs andUID:(NSString *)theUID andTheLabel:(NSString *)theLabel;
+- (id)initWithTagVOS:(NSArray *)theTagVOs andUser:(User *)theUser;
 
 @end

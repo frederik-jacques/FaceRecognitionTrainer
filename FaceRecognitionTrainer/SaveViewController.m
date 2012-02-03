@@ -7,45 +7,105 @@
 //
 
 #import "SaveViewController.h"
+#import "TrainingCell.h"
+#import "AddUserView.h"
 
 @implementation SaveViewController
 
-@synthesize firstNameTextfield,lastNameTextfield;
-@synthesize toolbar;
-@synthesize saveButton, cancelButton;
+@synthesize tableview;
+@synthesize managedObjectContext;
+@synthesize fetchResultController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+@synthesize navigationBar;
+
+@synthesize selectedUser;
+@synthesize addUserVC;
+
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *) context{
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAdded:) name:@"USER_ADDED" object:self.addUserVC];
+        
+        self.managedObjectContext = context;
+        
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstname" ascending:YES];
+        NSArray *arrSortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        request.sortDescriptors = arrSortDescriptors;
+        [arrSortDescriptors release];
+        arrSortDescriptors = nil;
+        
+        self.fetchResultController = [[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil] autorelease];
+        self.fetchResultController.delegate = self;
+        
+        NSError *error = nil;
+        if( [self.fetchResultController performFetch:&error] ){
+            NSLog(@"[SaveVC] Fetching users succeeded");
+        }else{
+            NSLog(@"[SaveVC] Fetching users failed");
+        }
     }
     return self;
 }
 
-#pragma mark - IBActions
-- (IBAction)returnKeyHandler:(id)sender {
-    NSLog(@"[SaveViewVC] Return key");
-    [sender resignFirstResponder];
+#pragma mark - NSFetchedResultsControllerDelegate methods
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    NSLog(@"[SaveVC] Model has been updated!");
+    [self.tableview reloadData];
 }
 
-- (IBAction)backgroundTouchedHandler:(id)sender {
-    NSLog(@"[SaveViewVC] Background touched");
-    [firstNameTextfield resignFirstResponder];
-    [lastNameTextfield resignFirstResponder];
+
+- (IBAction)addButtonClicked:(id)sender {
+    NSLog(@"[SaveVC] Add tapped");
+    self.addUserVC = [[[AddUserView alloc] initWithManagedObjectContext:self.managedObjectContext] autorelease];
+    [self presentModalViewController:self.addUserVC animated:YES];
 }
 
-- (IBAction)saveButtonHandler:(id)sender {
-    NSLog(@"[SaveViewVC] Save");
-    if( ![firstNameTextfield.text isEqualToString:@""] && ![lastNameTextfield.text isEqualToString:@""] ){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SAVE_NAME" object:self];
-        [self dismissModalViewControllerAnimated:YES];   
+- (void)userAdded:(id)sender {
+    NSLog(@"[SaveVC] User added");
+    [self.addUserVC dismissModalViewControllerAnimated:YES];
+//    [self.tableview reloadData];
+}
+
+#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return [[self.fetchResultController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchResultController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"UserCell";
+    
+    TrainingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    User *user = [self.fetchResultController objectAtIndexPath:indexPath];
+    
+    if (cell == nil) {
+        cell = [[[TrainingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier andUser:user] autorelease];
     }
+    
+    // Configure the cell...
+    cell.textLabel.text = user.label;
+    
+    return cell;
 }
 
-- (IBAction)cancelButtonHandler:(id)sender {
-    NSLog(@"[SaveViewVC] Cancel");
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TrainingCell *cell = (TrainingCell *)[tableView cellForRowAtIndexPath:indexPath];
+    selectedUser = cell.user;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SAVE_USER" object:self];
     [self dismissModalViewControllerAnimated:YES];
 }
+
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -64,11 +124,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.firstNameTextfield = nil;
-    self.lastNameTextfield = nil;
-    self.toolbar = nil;
-    self.saveButton = nil;
-    self.cancelButton = nil;
+    self.tableview = nil;
+    self.fetchResultController = nil;
+    
+    self.selectedUser = nil;
+    self.addUserVC = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -78,20 +138,19 @@
 
 - (void)dealloc {
     NSLog(@"[SaveViewVC] Dealloc");
-    [firstNameTextfield release];
-    firstNameTextfield = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_ADDED" object:self.addUserVC];
     
-    [lastNameTextfield release];
-    lastNameTextfield = nil;
+    [tableview release];
+    tableview = nil;
     
-    [toolbar release];
-    toolbar = nil;
+    [selectedUser release];
+    selectedUser = nil;
     
-    [saveButton release];
-    saveButton = nil;
+    [fetchResultController release];
+    fetchResultController = nil;
     
-    [cancelButton release];
-    cancelButton = nil;
+    [addUserVC release];
+    addUserVC = nil;
     
     [super dealloc];
 }

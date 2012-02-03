@@ -30,7 +30,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadPhotos:) name:@"UPLOAD_PHOTO" object:self.camera];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(detectingDone:) name:@"DETECTING_COMPLETE" object:self.detectCall];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save:) name:@"SAVE_NAME" object:self.saveVC];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save:) name:@"SAVE_USER" object:self.saveVC];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveComplete:) name:@"SAVING_COMPLETE" object:self.saveVC];
         
         self.title = @"Detect";
@@ -57,7 +57,7 @@
     self.camera.isDisabled = NO;
     [self.activityIndicator stopAnimating];
     
-    self.saveVC = [[[SaveViewController alloc] init] autorelease];
+    self.saveVC = [[[SaveViewController alloc] initWithManagedObjectContext:self.managedObjectContext] autorelease];
     self.saveVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:self.saveVC animated:YES];
 }
@@ -65,19 +65,13 @@
 - (void)save:(id)sender {
     NSLog(@"[DetectViewContainer] Save");
     
-    NSString *uid = [NSString stringWithFormat:@"%@%@@frederikjacques", self.saveVC.firstNameTextfield.text, self.saveVC.lastNameTextfield.text];
-    uid = [uid stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    NSString *label = [NSString stringWithFormat:@"%@ %@", self.saveVC.firstNameTextfield.text, self.saveVC.lastNameTextfield.text];
-    
     NSMutableArray *tagVOs = [[NSMutableArray alloc] init];
     
     for (TagVO *tagVO in self.detectCall.faceDetectVO.tags) {
         [tagVOs addObject:tagVO];
     }
     
-    self.saveCall = [[[SaveCall alloc] initWithTagVOS:tagVOs andUID:uid andTheLabel:label] autorelease];
-    self.saveCall.firstname = self.saveVC.firstNameTextfield.text;
-    self.saveCall.lastname = self.saveVC.lastNameTextfield.text;
+    self.saveCall = [[[SaveCall alloc] initWithTagVOS:tagVOs andUser:self.saveVC.selectedUser] autorelease];
     [self.saveCall execute];
     
     [tagVOs release];
@@ -88,7 +82,7 @@
     NSLog(@"[DetectViewContainer] Save complete!");
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"uid MATCHES %@", self.saveCall.uid];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"uid MATCHES %@", self.saveCall.user.uid];
     
     NSError *error = nil;
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -117,11 +111,11 @@
     NSError *error = nil;
     
     User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-    user.uid = self.saveCall.uid;
-    user.label = self.saveCall.label;
+    user.uid = self.saveCall.user.uid;
+    user.label = self.saveCall.user.label;
     user.isTrained = [NSNumber numberWithBool:NO];
-    user.firstname = self.saveCall.firstname;
-    user.lastname = self.saveCall.lastname;
+    user.firstname = self.saveCall.user.firstname;
+    user.lastname = self.saveCall.user.lastname;
     
     if( [self.managedObjectContext save:&error] ){
         NSLog(@"[DetectVC] User added!");
@@ -162,7 +156,7 @@
     NSLog(@"[DetectVC] Dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UPLOAD_PHOTO" object:self.camera];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DETECTING_COMPLETE" object:self.detectCall];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SAVE_NAME" object:self.saveVC];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SAVE_USER" object:self.saveVC];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SAVING_COMPLETE" object:self.saveVC];
     
     [camera release];

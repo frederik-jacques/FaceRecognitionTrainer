@@ -39,6 +39,10 @@
 		8680190F14D72F8A00015536 /* RecognizeCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680190E14D72F8A00015536 /* RecognizeCall.m */; };
 		8680191214D735AF00015536 /* UidVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680191114D735AF00015536 /* UidVO.m */; };
 		8680191514D74B9200015536 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8680191414D74B9100015536 /* User.m */; };
+		86B2CFBF14D9743100FA533B /* TrainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B2CFBD14D9743100FA533B /* TrainerViewController.m */; };
+		86B2CFC014D9743100FA533B /* TrainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86B2CFBE14D9743100FA533B /* TrainerViewController.xib */; };
+		86B2CFC514D9773800FA533B /* AddUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B2CFC314D9773800FA533B /* AddUserView.m */; };
+		86B2CFC614D9773800FA533B /* AddUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86B2CFC414D9773800FA533B /* AddUserView.xib */; };
 		86F590A914D5E507006FEF96 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590A814D5E507006FEF96 /* CoreMedia.framework */; };
 		86F590AC14D5E50E006FEF96 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F590AB14D5E50E006FEF96 /* CoreVideo.framework */; };
 		86F590B014D5F3E6006FEF96 /* PostCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F590AF14D5F3E6006FEF96 /* PostCall.m */; };
@@ -98,6 +102,12 @@
 		8680191114D735AF00015536 /* UidVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UidVO.m; sourceTree = "<group>"; };
 		8680191314D74B9000015536 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8680191414D74B9100015536 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		86B2CFBC14D9743100FA533B /* TrainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainerViewController.h; sourceTree = "<group>"; };
+		86B2CFBD14D9743100FA533B /* TrainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainerViewController.m; sourceTree = "<group>"; };
+		86B2CFBE14D9743100FA533B /* TrainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainerViewController.xib; sourceTree = "<group>"; };
+		86B2CFC214D9773800FA533B /* AddUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUserView.h; sourceTree = "<group>"; };
+		86B2CFC314D9773800FA533B /* AddUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUserView.m; sourceTree = "<group>"; };
+		86B2CFC414D9773800FA533B /* AddUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddUserView.xib; sourceTree = "<group>"; };
 		86F590A814D5E507006FEF96 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		86F590AB14D5E50E006FEF96 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		86F590AE14D5F3E6006FEF96 /* PostCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCall.h; sourceTree = "<group>"; };
@@ -192,6 +202,7 @@
 				86F590AD14D5F3D1006FEF96 /* Calls */,
 				867161DA14D5662A00055856 /* Camera */,
 				868018EA14D6C22800015536 /* Save */,
+				86B2CFC714D9773B00FA533B /* Add User */,
 				867161BC14D55DF400055856 /* first.png */,
 				867161BE14D55DF400055856 /* first@2x.png */,
 				867161B914D55DF400055856 /* DetectViewController.h */,
@@ -211,6 +222,9 @@
 				868018FE14D7178700015536 /* TrainingViewController.xib */,
 				8680190414D7212D00015536 /* TrainingCell.h */,
 				8680190514D7212D00015536 /* TrainingCell.m */,
+				86B2CFBC14D9743100FA533B /* TrainerViewController.h */,
+				86B2CFBD14D9743100FA533B /* TrainerViewController.m */,
+				86B2CFBE14D9743100FA533B /* TrainerViewController.xib */,
 			);
 			name = Train;
 			sourceTree = "<group>";
@@ -259,6 +273,16 @@
 				868018E714D6BD0E00015536 /* SaveViewController.xib */,
 			);
 			name = Save;
+			sourceTree = "<group>";
+		};
+		86B2CFC714D9773B00FA533B /* Add User */ = {
+			isa = PBXGroup;
+			children = (
+				86B2CFC214D9773800FA533B /* AddUserView.h */,
+				86B2CFC314D9773800FA533B /* AddUserView.m */,
+				86B2CFC414D9773800FA533B /* AddUserView.xib */,
+			);
+			name = "Add User";
 			sourceTree = "<group>";
 		};
 		86F590AD14D5F3D1006FEF96 /* Calls */ = {
@@ -347,6 +371,8 @@
 				867161D914D564FE00055856 /* RecognizeViewController.xib in Resources */,
 				868018E914D6BD0E00015536 /* SaveViewController.xib in Resources */,
 				8680190014D7178700015536 /* TrainingViewController.xib in Resources */,
+				86B2CFC014D9743100FA533B /* TrainerViewController.xib in Resources */,
+				86B2CFC614D9773800FA533B /* AddUserView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +404,8 @@
 				8680190F14D72F8A00015536 /* RecognizeCall.m in Sources */,
 				8680191214D735AF00015536 /* UidVO.m in Sources */,
 				8680191514D74B9200015536 /* User.m in Sources */,
+				86B2CFBF14D9743100FA533B /* TrainerViewController.m in Sources */,
+				86B2CFC514D9773800FA533B /* AddUserView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
