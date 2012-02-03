@@ -50,6 +50,7 @@
         
         for (NSDictionary *uidDict in arrUIDs) {
             UidVO *uidVO = [[UidVO alloc] initWithUID:[uidDict objectForKey:@"uid"] andConfidence:[uidDict objectForKey:@"confidence"]];
+            NSLog(@"[TagVO] Found uid %@ (confidence = %@)", [uidDict objectForKey:@"uid"], [uidDict objectForKey:@"confidence"]);
             [self.uids addObject:uidVO];
             [uidVO release];
             uidVO = nil;

@@ -111,6 +111,7 @@
     
     // Configure the cell...
     cell.textLabel.text = user.label;
+    cell.user = user;
     
     return cell;
 }
@@ -119,6 +120,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TrainingCell *cell = (TrainingCell *)[tableView cellForRowAtIndexPath:indexPath];
     User *user = cell.user;
+    
+    NSLog(@"[TrainingVC] User %@ %@ selected", user.firstname, user.lastname);
     
     [self.activityIndicator setHidden:NO];
     [self.activityIndicator startAnimating];

@@ -96,10 +96,16 @@
             self.tags = [[[NSMutableArray alloc] init] autorelease];
             for (NSDictionary *tagDict in tagsArray) {
                 TagVO *tagVO = [[TagVO alloc] initWithDictionary:tagDict];
-                
+                NSLog(@"[RecognizeCall] Tag VO");
                 for ( UidVO *vo in tagVO.uids) {
-                    if( vo.confidence > highestConfidence.confidence ){
+                    NSLog(@"[RecognizeCall] Looping through uids %@", vo.uid );
+                    NSLog(@"[RecognizeCall] Current confidence = %@", vo.confidence);
+                    NSLog(@"[RecognizeCall] Highest confidence = %@", highestConfidence.confidence);
+                    if( self.highestConfidence.confidence < vo.confidence ){
+                        NSLog(@"[RecognizeCall] Confidence higher then previous");
                         self.highestConfidence = vo;
+                    }else{
+                        NSLog(@"[RecognizeCall] Not higher");
                     }
                 }
                 
